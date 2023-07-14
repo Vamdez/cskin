@@ -1,0 +1,26 @@
+header{
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding: 9px;
+    margin-left: 15%;
+    margin-right: 15%;
+}
+
+.logo img{
+    height: 100px;
+    width: auto;
+}
+
+.login-button button{
+    background-color: #d3d3d3;
+    border-radius: 10px;
+    padding: 5px;
+    font-size: 15px;
+}
+
+.language-button img{
+    height: 100px;
+    width: auto;
+}
+
