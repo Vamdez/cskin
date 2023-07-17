@@ -4,3 +4,56 @@
     border:0;
     background-color: #3a3a3a;
 }
+
+.opc{
+    margin-left: 30%;
+    margin-right: 30%;  
+    padding-top: 100px;
+}
+.opc a{
+    color: black;
+    background-color: #d3d3d3;
+    border-radius: 20px;
+    padding: 50px;
+    text-decoration: none;
+}
+
+.create{
+    justify-content: space-between;
+    display: flex;
+}
+
+.saves{
+    padding-top: 100px;
+    display: flex;
+    justify-content: center;
+}
+
+.menu-login{
+    display: block; /*destrocar dysplay:none*/
+    position: fixed;
+    top: 50%;
+    left: 50%;
+    background-color: white;
+    padding: 3%;
+    z-index: 10000;
+    transform: translate(-50%, -50%);
+    border-radius: 10px;
+}
+.form-login, .form-login label{
+    background-color: white;
+}
+.form-login input{
+    background-color: #d3d3d3;
+    border-radius: 4px;
+}
+.overlay{
+    background-color: rgba(0, 0, 0, 0.5);
+    display: none;
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    z-index: 9999;
+}

@@ -8,5 +8,26 @@
 <body>
     <link rel="stylesheet" href="/public/css/index.css">
     <%- include('components/header.ejs')%>
+
+    <div class="overlay" id="overlay"></div>
+    <div class="menu-login" id="menu-login">
+        <form class="form-login" id="form-login" action="/dados" method="POST">
+            <label>Email:</label><br>
+            <input type="email" id="email" name="email"><br>
+            <label>Senha:</label><br>
+            <input type="password" id="password" name="password"><br>
+            <input type="submit" value="Login" id="submit">
+        </form>
+    </div>
+    <div class="opc">
+        <div class="create">
+            <a class="cfg" href="/cfg">CFG</a>
+            <a class="exec" href="/exec">EXECS</a>
+        </div>
+        <div class="saves">
+            <a class="saves" href="/saves">SAVES</a>
+        </div>
+    </div>
+    <script src="/public/scripts/script.js"></script>
 </body>
 </html>

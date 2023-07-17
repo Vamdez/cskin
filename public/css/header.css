@@ -12,11 +12,14 @@ header{
     width: auto;
 }
 
-.login-button button{
-    background-color: #d3d3d3;
+.login button{
+    background-color: #474444;
     border-radius: 10px;
     padding: 5px;
-    font-size: 15px;
+    font-size: 30px;
+    color: #fc0fc0;
+    font-family: Marker Felt, 'fantasy';
+    letter-spacing: -1px;
 }
 
 .language-button img{
