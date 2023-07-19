@@ -21,16 +21,17 @@
         </form>
     </div>
     <div class="menu-sign" id="menu-sign">
-        <form class="form-sign" id="form-sign" action="/sign" method="post">
-            <label>Nome Completo</label>
-            <input type="text" id="nome" >
+        <form class="form-sign" id="form-sign">
+            <label>Nome Completo</label><br>
+            <input type="text" id="nome" ><br>
             <label>Email:</label><br>
             <input type="email" id="sign-email" name="sign-email"><br>
             <label>Senha</label><br>
             <input type="password" id="sign-password" name="sign-password"><br>
-            <label>Confirma Senha</label>
+            <label>Confirma Senha</label><br>
             <input type="password" id="confirm-password" name="confirm-password"><br>
-            <input type="submit" value="Criar-Conta" id="sign-submit">
+            <div class="alert-password" id="alert-password" style="display: none;"> *senhas diferentes</div>
+            <input type="submit" value="Criar-Conta" id="sign-submit"><br>   
         </form>
     </div>
     <div class="opc">

@@ -41,10 +41,10 @@
     border-radius: 10px;
 }
 
-.form-login, .form-login label{
+.form-login, .form-login label, .form-sign, .form-sign label{
     background-color: white;
 }
-.form-login input{
+.form-login input, .form-sign input{
     background-color: #d3d3d3;
     border-radius: 4px;
 }
@@ -69,4 +69,12 @@
     z-index: 10001;
     transform: translate(-50%, -50%);
     border-radius: 10px;
+}
+
+.alert-password{
+    background-color: white;
+    color: red;
+    font-size: smaller;
+    padding-left: 2px;
+    padding-bottom: 3px;
 }

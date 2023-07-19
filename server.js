@@ -24,7 +24,14 @@ app.post('/dados', (req, res) => {
 
 app.get('/dados', (req, res)=>{
   res.send("enviado");
-})
+});
+
+app.post('/sign', (req, res)=>{
+  const senha = req.body['sign-password'];
+  const confirmacaoSenha = req.body['confirm-password'];
+  res.send("Dados recebidos")
+});
+
 app.listen(5000, () => {
   console.log("Server Running");
 });
