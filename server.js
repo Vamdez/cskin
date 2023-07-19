@@ -13,13 +13,18 @@ app.get('/', (req, res) => {
   res.render('index');
 });
 
+let dados={};
+
 app.post('/dados', (req, res) => {
   const email = req.body.email;
   const senha = req.body.password;
-  res.send("Formulário enviado com sucesso. Email: " + email);
+  dados = {email:email,
+  senha:senha};
 });
 
-
+app.get('/dados', (req, res)=>{
+  res.send("enviado");
+})
 app.listen(5000, () => {
   console.log("Server Running");
 });
