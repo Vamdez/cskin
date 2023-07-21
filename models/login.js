@@ -7,24 +7,32 @@ const Signup = db.define(
             type: Sequelize.INTEGER,
             allowNull:false,
             autoIncrement: true,
-            primaryKey: true
+            primaryKey: true,
+            unique: true
         },
         nome:{
-            type: Sequelize.ARRAY,
+            type: Sequelize.STRING,
             allowNull: false
         },
         email:{
-            type: Sequelize.ARRAY,
-            allowNull: false
+
+            type: Sequelize.STRING,
+            allowNull: false,
+            unique: true
         },
         password:{
             type: Sequelize.STRING,
             allowNull:false
-        },
-        define:{
-            timestamps: true,
-            timezone: "-03:00"
         }
 })
+//sync({ force: true }) ==> Force to create a table, dropping if it alerady existed
+//sync({ alter: true }) ==> Alters the columns and data types of an existing table
+Signup.sync() //Create table if not existed
+    .then(() => {
+        console.log('Tabela criada com sucesso ou já existente.');
+    })
+    .catch((error) => {
+        console.error('Erro ao criar a tabela:', error);
+    });
 
-module.exports(Signup);
+module.exports = Signup;

@@ -2,3 +2,4 @@ node_modules/*
 objective/*
 api/*
 *.json
+.env

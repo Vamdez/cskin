@@ -27,11 +27,15 @@ const form_sign = document.getElementById("form-sign");
 
 form_sign.addEventListener('submit', function(event){
     event.preventDefault();
-
     const email = document.getElementById("sign-email").value;
     const senha = document.getElementById("sign-password").value;
     const confirmacaoSenha = document.getElementById("confirm-password").value;
     const nome = document.getElementById("nome").value;
+    if(!senha || !confirmacaoSenha || !nome || !email){
+        alert_password.style.display = "block";
+        alert_password.innerHTML = "*preencha os campos vazios";
+        return;
+    }
     if(senha!==confirmacaoSenha){
         alert_password.style.display = "block";
         return;
@@ -39,19 +43,16 @@ form_sign.addEventListener('submit', function(event){
     const data = {
         'nome': nome,
         'sign-email': email,
-        'sign-password': senha,
-        'confirm-password': confirmacaoSenha
+        'sign-password': senha
     };
 
     fetch('http://localhost:5000/sign',{
         method: 'POST',
         headers: {
-            'Content-Type': 'aplication/json'
+            'Content-Type': 'application/json'
         },
         body: JSON.stringify(data)
     })
-    .then(response =>(response)
-    )
     .catch(error => {
         console.error('ERRO', error);
     });
@@ -60,7 +61,5 @@ form_sign.addEventListener('submit', function(event){
     overlay.style.display = "none";
     menu_sign.style.display = "none";
 })
-
-
 
 
