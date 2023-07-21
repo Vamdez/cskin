@@ -1,3 +1,4 @@
+
 const button_login = document.getElementById("login-button");
 const menu_login = document.getElementById("menu-login");
 const overlay = document.getElementById("overlay");
@@ -38,6 +39,7 @@ form_sign.addEventListener('submit', function(event){
     }
     if(senha!==confirmacaoSenha){
         alert_password.style.display = "block";
+        alert_password.innerHTML = "*senhas diferentes";
         return;
     }
     const data = {
@@ -53,13 +55,28 @@ form_sign.addEventListener('submit', function(event){
         },
         body: JSON.stringify(data)
     })
+    .then(function(response){
+        console.log(response);
+        if(response.ok){
+            return response.text();
+        }
+    })
+    .then(function(data){
+        console.log(data);
+        if(data){
+        alert_password.innerHTML = data;
+        alert_password.style.display = "block";
+        }
+        else{
+            alert_password.style.display = "none";
+            overlay.style.display = "none";
+            menu_sign.style.display = "none";
+        }
+        return;
+    })
     .catch(error => {
         console.error('ERRO', error);
     });
-
-    alert_password.style.display = "none";
-    overlay.style.display = "none";
-    menu_sign.style.display = "none";
 })
 
 

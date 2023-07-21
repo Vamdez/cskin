@@ -4,6 +4,7 @@ const app = express();
 const db = require('./models/db');
 const sign = require('./models/login');
 const bodyParser = require('body-parser');
+const { name } = require('ejs');
 
 
 app.use(express.urlencoded({ extended: true }));
@@ -37,17 +38,21 @@ app.post('/sign', (req, res)=>{
   const senha = req.body['sign-password'];
   const nome = req.body['nome'];
   const email = req.body['sign-email'];
-
+  let msg;
   sign.create({password:senha, nome:nome, email:email})
   .then(function(response){
     console.log("Dados adicionados");
-    return response;
+    res.send(msg)
   }).catch((error)=>{
-    console.log("ERRO: ", error);
+    const name_error = error['name'];
+    console.log("ERRO:", name_error);
+    if(name_error === 'SequelizeUniqueConstraintError'){
+      res.send("*email já cadastrado");
+    }
   });
-  res.send("Dados recebidos");
+
 });
 
 app.listen(5000, () => {
-  console.log("Server Running", process.env.DB_PASSWORD);
+  console.log("Server Running");
 });
