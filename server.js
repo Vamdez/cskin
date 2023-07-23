@@ -38,16 +38,20 @@ app.post('/sign', (req, res)=>{
   const senha = req.body['sign-password'];
   const nome = req.body['nome'];
   const email = req.body['sign-email'];
-  let msg;
   sign.create({password:senha, nome:nome, email:email})
   .then(function(response){
     console.log("Dados adicionados");
-    res.send(msg)
+    res.json({
+      erro:false,
+      msg:'Cadastro realizado com sucesso'
+    })
   }).catch((error)=>{
     const name_error = error['name'];
     console.log("ERRO:", name_error);
     if(name_error === 'SequelizeUniqueConstraintError'){
-      res.send("*email já cadastrado");
+      res.json({
+        erro:true,
+        msg:'*email já cadastrado'});
     }
   });
 

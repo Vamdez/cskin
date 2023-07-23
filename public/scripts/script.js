@@ -25,6 +25,7 @@ button_sign.addEventListener("click", function(){
 
 const alert_password = document.getElementById("alert-password");
 const form_sign = document.getElementById("form-sign");
+const sucess_sign = document.getElementById("sucess-sign");
 
 form_sign.addEventListener('submit', function(event){
     event.preventDefault();
@@ -58,19 +59,21 @@ form_sign.addEventListener('submit', function(event){
     .then(function(response){
         console.log(response);
         if(response.ok){
-            return response.text();
+            return response.json();
         }
     })
     .then(function(data){
         console.log(data);
-        if(data){
-        alert_password.innerHTML = data;
+        if(data['erro']){
+        alert_password.innerHTML = data['msg'];
         alert_password.style.display = "block";
         }
         else{
             alert_password.style.display = "none";
             overlay.style.display = "none";
-            menu_sign.style.display = "none";
+            form_sign.style.display = "none";
+            sucess_sign.innerHTML = data['msg'];
+            sucess_sign.style.display = "block";
         }
         return;
     })
