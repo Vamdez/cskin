@@ -45,8 +45,8 @@ form_sign.addEventListener('submit', function(event){
     }
     const data = {
         'nome': nome,
-        'sign-email': email,
-        'sign-password': senha
+        'email': email,
+        'password': senha
     };
 
     fetch('http://localhost:5000/sign',{
