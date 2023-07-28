@@ -19,7 +19,7 @@ class UserController{
         return;
       }
       try{
-      await Sign.create({nome:'',email:'vamdez123@gmail.com', password:''});
+      await Sign.create(req.body);
       console.log("Dados adicionados");
       res.json({
         erro: false,

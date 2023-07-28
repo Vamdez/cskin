@@ -1,16 +1,17 @@
-*{
-    margin:0;
-    padding:0;
-    border:0;
+* {
+    margin: 0;
+    padding: 0;
+    border: 0;
     background-color: #3a3a3a;
 }
 
-.opc{
+.opc {
     margin-left: 30%;
-    margin-right: 30%;  
+    margin-right: 30%;
     padding-top: 100px;
 }
-.opc a{
+
+.opc a {
     color: black;
     background-color: #d3d3d3;
     border-radius: 20px;
@@ -18,37 +19,47 @@
     text-decoration: none;
 }
 
-.create{
+.create {
     justify-content: space-between;
     display: flex;
 }
 
-.saves{
+.saves {
     padding-top: 100px;
     display: flex;
     justify-content: center;
 }
 
-.menu-login{
-    display: none; 
+.menu-login {
+    display: none;
     position: fixed;
     top: 50%;
     left: 50%;
     background-color: white;
-    padding: 3%;
+    padding: 2% 3% 3% 3%;
     z-index: 10000;
     transform: translate(-50%, -50%);
     border-radius: 10px;
 }
 
-.form-login, .form-login label, .form-sign, .form-sign label{
+.form-login,
+.form-login label,
+.form-sign,
+.form-sign label {
     background-color: white;
 }
-.form-login input, .form-sign input{
+
+.form-sign {
+    padding-top: 5%;
+}
+
+.form-login input,
+.form-sign input {
     background-color: #d3d3d3;
     border-radius: 4px;
 }
-.overlay{
+
+.overlay {
     background-color: rgba(0, 0, 0, 0.5);
     display: none;
     position: fixed;
@@ -59,27 +70,38 @@
     z-index: 9999;
 }
 
-.menu-sign{
-    display: none; 
+.menu-sign {
+    display: none;
     position: fixed;
     top: 50%;
     left: 50%;
     background-color: white;
-    padding: 3%;
+    padding: 2% 3% 3% 3%;
     z-index: 10001;
     transform: translate(-50%, -50%);
     border-radius: 10px;
     border: 2px solid black;
 }
 
-.alert-password{
+.alert-password {
     background-color: white;
     color: red;
     font-size: smaller;
-    padding-left: 2px;
-    padding-bottom: 3px;
+    padding: 0 0 3px 2px;
 }
 
-.sucess-sign{
+.sucess-sign {
     background-color: white;
+}
+.container-exit{
+    background-color: white;
+    display: flex;
+    justify-content: flex-end;
+}
+.exit {
+    background-color: white;
+    padding-bottom: 10px;
+    font-size: 18px;
+    color: #918787;
+    font-family: sans-serif;
 }

@@ -82,4 +82,12 @@ form_sign.addEventListener('submit', function(event){
     });
 })
 
-
+function exit(){
+    menu_login.style.display = 'none';
+    menu_sign.style.display = 'none';
+    overlay.style.display = 'none';
+}
+const exit_login = document.getElementById("exit-login");
+const exit_sign = document.getElementById("exit-sign");
+exit_login.addEventListener('click', exit);
+exit_sign.addEventListener('click', exit);
