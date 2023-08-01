@@ -1,0 +1,36 @@
+<div class="overlay" id="overlay"></div>
+<div class="menu-login" id="menu-login">
+    <div class="container-exit">
+        <button class="exit" id="exit-login">X</button>
+        </div>
+    <form class="form-login" id="form-login" action="/dados" method="POST">
+        <label>Email:</label><br>
+        <input type="email" id="email" name="email"><br>
+        <label>Senha:</label><br>
+        <input type="password" id="password" name="password"><br>
+        <input type="submit" value="Login" id="submit">
+        <input type="button" value="Signup" id="signup" class="signup">
+    </form>
+</div>
+<div class="menu-sign" id="menu-sign">
+    <div class="container-exit">
+    <button class="exit" id="exit-sign">X</button>
+    </div>
+    <form class="form-sign" id="form-sign">
+        <label>Nome Completo</label><br>
+        <input type="text" id="nome" ><br>
+        <label>Email:</label><br>
+        <input type="email" id="sign-email" name="sign-email"><br>
+        <label>Senha</label><br>
+        <input type="password" id="sign-password" name="sign-password"><br>
+        <label>Confirma Senha</label><br>
+        <input type="password" id="confirm-password" name="confirm-password"><br>
+        <div class="alert-password" id="alert-password" style="display: none;"></div>
+        <input type="submit" value="Criar-Conta" id="sign-submit"><br>   
+    </form>
+    <div class="sucess-sign" id="sucess-sign" style="display: none;">
+        <div class="container-exit">
+            <button class="exit" id="exit-sign">X</button>
+            </div>
+    </div>
+</div>

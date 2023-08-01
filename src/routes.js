@@ -8,7 +8,10 @@ routes.set('views', 'src/views');
 routes.get('/', (req, res) => {
     res.render('index');
   });
-  
+
+routes.get('/exec', (req, res) => {
+    res.render('exec');
+})
   
 routes.post('/dados', UserController.loginValidation);
   
