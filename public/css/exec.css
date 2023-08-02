@@ -1,6 +1,41 @@
 * {
-    margin: 0;
+    margin-left: 0;
     padding: 0;
     border: 0;
     background-color: #3a3a3a;
+}
+
+.container-exec{
+    font-style: normal;
+}
+
+
+.opc-exec{
+    margin-left: 20%;
+    margin-right: 20%;
+    padding-top: 100px;
+    color: white;
+}
+
+.actions-exec{
+    margin-left: 30%;
+    margin-right: 30%;
+    display: flex;
+    justify-content: space-between;
+}
+
+.actions-exec button{
+    font-size: 15px;
+    color: black;
+    height: 70px;
+    width: 140px;
+    border-radius: 10px;
+}
+
+.save-exec button{
+    background-color: greenyellow;
+}
+
+.create-exec button{
+    background-color: greenyellow;
 }
