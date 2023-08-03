@@ -1,6 +1,7 @@
 const button_login = document.getElementById("login-button");
 const menu_login = document.getElementById("menu-login");
 const overlay = document.getElementById("overlay");
+const alert_password = document.getElementById("alert-password");
 button_login.addEventListener('click', function(){
     menu_login.style.display = "block";
     overlay.style.display = "block";
@@ -8,12 +9,45 @@ button_login.addEventListener('click', function(){
 
 const form_login = document.getElementById("form-login");
 const submit_login = document.getElementById("submit");
-
 form_login.addEventListener('submit', function(event){
     event.preventDefault();
-    menu_login.style.display = "none";
-    overlay.style.display = "none";
+    const password_login = document.getElementById("password-login").value;
+    const email_login = document.getElementById("email-login").value;
+    if(!password_login || !email_login){
+        alert_password.style.display = "block";
+        alert_password.innerHTML = "*preencha os campos vazios";
+        return;
+    }
+    const data_login = {
+        email: email_login,
+        password: password_login
+    };
+
+    fetch("http://localhost:5000/login",{
+        method: "POST",
+        headers:{
+            'Content-Type': 'application/json'
+        },
+        body: JSON.stringify(data_login)
+    }).then(function(response){
+        if(response.ok){
+            return response.json();
+        }
+    }).then(function(data){
+        if(data['erro']){
+            alert_password.innerHTML = data['msg']
+            alert_password.style.display = "block";
+        }
+        else{
+            menu_login.style.display = "none";
+            overlay.style.display = "none";
+        }
+    })
+
 })
+
+
+
 const button_sign = document.getElementById("signup");
 const menu_sign = document.getElementById("menu-sign");
 
@@ -22,30 +56,30 @@ button_sign.addEventListener("click", function(){
     menu_sign.style.display = "block";
 })
 
-const alert_password = document.getElementById("alert-password");
+
 const form_sign = document.getElementById("form-sign");
 const sucess_sign = document.getElementById("sucess-sign");
 
 form_sign.addEventListener('submit', function(event){
     event.preventDefault();
-    const email = document.getElementById("sign-email").value;
-    const senha = document.getElementById("sign-password").value;
+    const email_sign = document.getElementById("sign-email").value;
+    const senha_sign = document.getElementById("sign-password").value;
     const confirmacaoSenha = document.getElementById("confirm-password").value;
-    const nome = document.getElementById("nome").value;
-    if(!senha || !confirmacaoSenha || !nome || !email){
+    const name_sign = document.getElementById("nome").value;
+    if(!senha_sign || !confirmacaoSenha || !name_sign || !email_sign){
         alert_password.style.display = "block";
         alert_password.innerHTML = "*preencha os campos vazios";
         return;
     }
-    if(senha!==confirmacaoSenha){
+    if(senha_sign!==confirmacaoSenha){
         alert_password.style.display = "block";
         alert_password.innerHTML = "*senhas diferentes";
         return;
     }
     const data = {
-        'nome': nome,
-        'email': email,
-        'password': senha
+        'name': name_sign,
+        'email': email_sign,
+        'password': senha_sign
     };
 
     fetch('http://localhost:5000/sign',{
@@ -62,7 +96,6 @@ form_sign.addEventListener('submit', function(event){
         }
     })
     .then(function(data){
-        console.log(data);
         if(data['erro']){
         alert_password.innerHTML = data['msg'];
         alert_password.style.display = "block";

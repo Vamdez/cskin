@@ -1,25 +1,53 @@
+const bcrypt = require('bcrypt');
 const { where } = require('sequelize');
 const Sign = require('../models/login');
 
+
 class UserController{
-    loginValidation(req, res){
-        const email = req.body.email;
-        const senha = req.body.password;
-        const dados = {email:email,
-        senha:senha};
+    async loginValidation(req, res){
+      //Validation
+      const {email, password} = req.body;
+      console.log(email)
+      console.log(password)
+      const emailExist = await Sign.findOne({
+        where: {email: email}
+      })
+      if(!emailExist){
+        res.json({erro:true, msg:'*email não cadastrado'});
+        return;
+      }
+      else{
+        res.json({erro:false, msg:'login realizado com sucesso'}) //MUDAR
+      }
+      //Auth User
     }
 
     async signValidation(req, res){
-      const emailExist = await Sign.findAll({
-          where: {email: req.body.email}
-      })
+      const {name, password, email} = req.body
 
-      if(emailExist.length > 0){
-        res.json({erro:true, msg:'*email já cadastrado'})
+      //Validations
+
+      const emailExist = await Sign.findOne({
+          where: {email: email}
+      })
+      if(emailExist){
+        res.json({erro:true, msg:'*email já cadastrado'});
         return;
       }
+
+      //Crypt Password
+
+      const salt = await bcrypt.genSalt(12);
+      const passwordHash = await bcrypt.hash(password, salt);
+
+      //Create User
+
       try{
-      await Sign.create(req.body);
+      await Sign.create({
+        name,
+        email,
+        password : passwordHash
+      });
       console.log("Dados adicionados");
       res.json({
         erro: false,

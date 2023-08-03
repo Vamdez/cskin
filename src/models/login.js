@@ -10,7 +10,7 @@ const Signup = db.define(
             primaryKey: true,
             unique: true
         },
-        nome:{
+        name:{
             type: Sequelize.STRING,
             allowNull: false
         },

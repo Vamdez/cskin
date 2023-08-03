@@ -3,11 +3,12 @@
     <div class="container-exit">
         <button class="exit" id="exit-login">X</button>
         </div>
-    <form class="form-login" id="form-login" action="/dados" method="POST">
+    <form class="form-login" id="form-login">
         <label>Email:</label><br>
-        <input type="email" id="email" name="email"><br>
+        <input type="email" id="email-login" name="email"><br>
         <label>Senha:</label><br>
-        <input type="password" id="password" name="password"><br>
+        <input type="password" id="password-login" name="password"><br>
+        <div class="alert-password" id="alert-password" style="display: none;"></div>
         <input type="submit" value="Login" id="submit">
         <input type="button" value="Signup" id="signup" class="signup">
     </form>
