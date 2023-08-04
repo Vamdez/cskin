@@ -2,6 +2,7 @@ const button_login = document.getElementById("login-button");
 const menu_login = document.getElementById("menu-login");
 const overlay = document.getElementById("overlay");
 const alert_password = document.getElementById("alert-password");
+const sucess = document.getElementById("sucess");
 button_login.addEventListener('click', function(){
     menu_login.style.display = "block";
     overlay.style.display = "block";
@@ -41,11 +42,12 @@ form_login.addEventListener('submit', function(event){
         else{
             menu_login.style.display = "none";
             overlay.style.display = "none";
+            sucess.innerHTML = data['msg'];
+            sucess.style.display = "block";
         }
     })
 
 })
-
 
 
 const button_sign = document.getElementById("signup");
@@ -58,7 +60,6 @@ button_sign.addEventListener("click", function(){
 
 
 const form_sign = document.getElementById("form-sign");
-const sucess_sign = document.getElementById("sucess-sign");
 
 form_sign.addEventListener('submit', function(event){
     event.preventDefault();
@@ -104,8 +105,8 @@ form_sign.addEventListener('submit', function(event){
             alert_password.style.display = "none";
             overlay.style.display = "none";
             form_sign.style.display = "none";
-            sucess_sign.innerHTML = data['msg'];
-            sucess_sign.style.display = "block";
+            sucess.innerHTML = data['msg'];
+            sucess.style.display = "block";
         }
         return;
     })

@@ -16,10 +16,12 @@ class UserController{
         res.json({erro:true, msg:'*email não cadastrado'});
         return;
       }
-      else{
-        res.json({erro:false, msg:'login realizado com sucesso'}) //MUDAR
+      const checkPassword = await bcrypt.compare(password, emailExist.password);
+      if(!checkPassword){
+        res.json({erro:true, msg:'*senha ou email incorreto'});
+        return;
       }
-      //Auth User
+      res.json({erro:false, msg:'Cadastro realizado com sucesso'});
     }
 
     async signValidation(req, res){
