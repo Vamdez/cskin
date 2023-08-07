@@ -1,5 +1,6 @@
 const bcrypt = require('bcrypt');
 const { where } = require('sequelize');
+const jwt = require('jsonwebtoken');
 const Sign = require('../models/login');
 
 
@@ -7,21 +8,23 @@ class UserController{
     async loginValidation(req, res){
       //Validation
       const {email, password} = req.body;
-      console.log(email)
-      console.log(password)
+
       const emailExist = await Sign.findOne({
         where: {email: email}
       })
+
       if(!emailExist){
-        res.json({erro:true, msg:'*email não cadastrado'});
+        res.status(422).json({msg:'*email não cadastrado', auth:false});
         return;
       }
       const checkPassword = await bcrypt.compare(password, emailExist.password);
       if(!checkPassword){
-        res.json({erro:true, msg:'*senha ou email incorreto'});
+        res.status(422).json({msg:'*senha ou email incorreto', auth:false});
         return;
       }
-      res.json({erro:false, msg:'Cadastro realizado com sucesso'});
+      console.log(emailExist.id);
+      const token = jwt.sign({userId:emailExist.id}, process.env.SECRET, {expiresIn: 300});
+      res.status(200).json({msg:'Cadastro realizado com sucesso', auth:true, token});
     }
 
     async signValidation(req, res){
@@ -33,7 +36,7 @@ class UserController{
           where: {email: email}
       })
       if(emailExist){
-        res.json({erro:true, msg:'*email já cadastrado'});
+        res.status(422).json({msg:'*email já cadastrado', auth:false});
         return;
       }
 
@@ -51,13 +54,11 @@ class UserController{
         password : passwordHash
       });
       console.log("Dados adicionados");
-      res.json({
-        erro: false,
-        msg: 'Cadastro realizado com sucesso'
-      });
+      const token = jwt.sign(emailExist.id, process.env.SECRET, {expiresIn: 300});
+      res.status(200).json({msg: 'Cadastro realizado com sucesso', auth:true, token});
     }catch (error) {
       console.log(error);
-      res.json({erro: true,msg: 'Ocorreu um erro ao processar a requisição'});
+      res.status(422).json({msg: 'Ocorreu um erro ao processar a requisição', auth:false});
     }
   }
 }

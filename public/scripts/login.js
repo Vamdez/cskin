@@ -2,7 +2,10 @@ const button_login = document.getElementById("login-button");
 const menu_login = document.getElementById("menu-login");
 const overlay = document.getElementById("overlay");
 const alert_password = document.getElementById("alert-password");
-const sucess = document.getElementById("sucess");
+const sucessLogin = document.getElementById("sucess-login");
+const sucessSign = document.getElementById("sucess-sign");
+
+
 button_login.addEventListener('click', function(){
     menu_login.style.display = "block";
     overlay.style.display = "block";
@@ -40,10 +43,11 @@ form_login.addEventListener('submit', function(event){
             alert_password.style.display = "block";
         }
         else{
-            menu_login.style.display = "none";
+            alert_password.style.display = "none";
+            form_login.style.display = "none";
             overlay.style.display = "none";
-            sucess.innerHTML = data['msg'];
-            sucess.style.display = "block";
+            sucessLogin.innerHTML = data['msg'];
+            sucessLogin.style.display = "block";
         }
     })
 
@@ -105,8 +109,8 @@ form_sign.addEventListener('submit', function(event){
             alert_password.style.display = "none";
             overlay.style.display = "none";
             form_sign.style.display = "none";
-            sucess.innerHTML = data['msg'];
-            sucess.style.display = "block";
+            sucessSign.innerHTML = data['msg'];
+            sucessSign.style.display = "block";
         }
         return;
     })
