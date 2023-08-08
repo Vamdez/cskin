@@ -1,4 +1,5 @@
-const UserController = require('./controllers/UserController.js')
+const UserController = require('./controllers/UserController.js');
+const SessionController = require('./controllers/SessionController.js');
 const express = require("express");
 const routes = express();
 
@@ -7,7 +8,7 @@ routes.set('views', 'src/views');
 
 routes.get('/', (req, res) => {
     res.render('index');
-  });
+  }); 
 
 routes.get('/exec', (req, res) => {
     res.render('exec');
@@ -21,4 +22,8 @@ routes.get('/dados', (req, res)=>{
   
 routes.post('/sign', UserController.signValidation);
 
+routes.get('/save', SessionController.jwtVerify, (req, res)=>{
+  console.log(req.userId);
+  res.json({id:"1", nome:"Victor"});
+})
 module.exports = routes;

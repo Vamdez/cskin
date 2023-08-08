@@ -1,7 +1,8 @@
 const button_login = document.getElementById("login-button");
 const menu_login = document.getElementById("menu-login");
 const overlay = document.getElementById("overlay");
-const alert_password = document.getElementById("alert-password");
+const alert_login = document.getElementById("alert-login");
+const alert_sign = document.getElementById("alert-sign");
 const sucessLogin = document.getElementById("sucess-login");
 const sucessSign = document.getElementById("sucess-sign");
 
@@ -18,8 +19,8 @@ form_login.addEventListener('submit', function(event){
     const password_login = document.getElementById("password-login").value;
     const email_login = document.getElementById("email-login").value;
     if(!password_login || !email_login){
-        alert_password.style.display = "block";
-        alert_password.innerHTML = "*preencha os campos vazios";
+        alert_login.style.display = "block";
+        alert_login.innerHTML = "*preencha os campos vazios";
         return;
     }
     const data_login = {
@@ -34,16 +35,14 @@ form_login.addEventListener('submit', function(event){
         },
         body: JSON.stringify(data_login)
     }).then(function(response){
-        if(response.ok){
-            return response.json();
-        }
+        return response.json();
     }).then(function(data){
-        if(data['erro']){
-            alert_password.innerHTML = data['msg']
-            alert_password.style.display = "block";
+        if(!data['auth']){
+            alert_login.innerHTML = data['msg']
+            alert_login.style.display = "block";
         }
         else{
-            alert_password.style.display = "none";
+            alert_login.style.display = "none";
             form_login.style.display = "none";
             overlay.style.display = "none";
             sucessLogin.innerHTML = data['msg'];
@@ -72,13 +71,13 @@ form_sign.addEventListener('submit', function(event){
     const confirmacaoSenha = document.getElementById("confirm-password").value;
     const name_sign = document.getElementById("nome").value;
     if(!senha_sign || !confirmacaoSenha || !name_sign || !email_sign){
-        alert_password.style.display = "block";
-        alert_password.innerHTML = "*preencha os campos vazios";
+        alert_sign.style.display = "block";
+        alert_sign.innerHTML = "*preencha os campos vazios";
         return;
     }
     if(senha_sign!==confirmacaoSenha){
-        alert_password.style.display = "block";
-        alert_password.innerHTML = "*senhas diferentes";
+        alert_sign.style.display = "block";
+        alert_sign.innerHTML = "*senhas diferentes";
         return;
     }
     const data = {
@@ -95,18 +94,16 @@ form_sign.addEventListener('submit', function(event){
         body: JSON.stringify(data)
     })
     .then(function(response){
-        console.log(response);
-        if(response.ok){
-            return response.json();
-        }
+        return response.json();
     })
     .then(function(data){
-        if(data['erro']){
-        alert_password.innerHTML = data['msg'];
-        alert_password.style.display = "block";
+        console.log(data);
+        if(!data['auth']){
+            alert_sign.innerHTML = data['msg'];
+            alert_sign.style.display = "block";
         }
         else{
-            alert_password.style.display = "none";
+            alert_sign.style.display = "none";
             overlay.style.display = "none";
             form_sign.style.display = "none";
             sucessSign.innerHTML = data['msg'];

@@ -29,17 +29,17 @@ class UserController{
 
     async signValidation(req, res){
       const {name, password, email} = req.body
-
+      console.log("FOI");
       //Validations
 
-      const emailExist = await Sign.findOne({
+      let emailExist = await Sign.findOne({
           where: {email: email}
       })
+
       if(emailExist){
         res.status(422).json({msg:'*email já cadastrado', auth:false});
         return;
       }
-
       //Crypt Password
 
       const salt = await bcrypt.genSalt(12);
@@ -53,8 +53,11 @@ class UserController{
         email,
         password : passwordHash
       });
+      emailExist = await Sign.findOne({
+        where: {email: email}
+    })
       console.log("Dados adicionados");
-      const token = jwt.sign(emailExist.id, process.env.SECRET, {expiresIn: 300});
+      const token = jwt.sign({userId: emailExist.id}, process.env.SECRET, {expiresIn: 30000});
       res.status(200).json({msg: 'Cadastro realizado com sucesso', auth:true, token});
     }catch (error) {
       console.log(error);
