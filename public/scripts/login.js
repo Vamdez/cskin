@@ -5,7 +5,8 @@ const alert_login = document.getElementById("alert-login");
 const alert_sign = document.getElementById("alert-sign");
 const sucessLogin = document.getElementById("sucess-login");
 const sucessSign = document.getElementById("sucess-sign");
-
+const img_login = document.getElementById("login-button");
+const img_profile = document.getElementById("profile-button");
 
 button_login.addEventListener('click', function(){
     menu_login.style.display = "block";
@@ -42,11 +43,15 @@ form_login.addEventListener('submit', function(event){
             alert_login.style.display = "block";
         }
         else{
+            localStorage.setItem("token", data['token']);
             alert_login.style.display = "none";
             form_login.style.display = "none";
             overlay.style.display = "none";
+            img_login.style.display="none";
+            img_profile.style.display="block"
             sucessLogin.innerHTML = data['msg'];
             sucessLogin.style.display = "block";
+            console.log(localStorage.getItem('token'))
         }
     })
 
@@ -103,9 +108,12 @@ form_sign.addEventListener('submit', function(event){
             alert_sign.style.display = "block";
         }
         else{
+            localStorage.setItem('token', data['token'])
             alert_sign.style.display = "none";
             overlay.style.display = "none";
             form_sign.style.display = "none";
+            img_login.style.display="none";
+            img_profile.style.display="block"
             sucessSign.innerHTML = data['msg'];
             sucessSign.style.display = "block";
         }

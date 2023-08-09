@@ -12,7 +12,10 @@ header{
     width: auto;
 }
 
-.login button{
+.login{
+    padding: 5px;
+}
+#login-button{
     background-color: #474444;
     border-radius: 10px;
     padding: 5px;
@@ -22,8 +25,7 @@ header{
     letter-spacing: -1px;
 }
 
-.language-button img{
-    height: 100px;
+#profile-button img{
+    height: 50px;
     width: auto;
 }
-

@@ -57,7 +57,7 @@ class UserController{
         where: {email: email}
     })
       console.log("Dados adicionados");
-      const token = jwt.sign({userId: emailExist.id}, process.env.SECRET, {expiresIn: 30000});
+      const token = jwt.sign({userId: emailExist.id}, process.env.SECRET, {expiresIn: 300});
       res.status(200).json({msg: 'Cadastro realizado com sucesso', auth:true, token});
     }catch (error) {
       console.log(error);
