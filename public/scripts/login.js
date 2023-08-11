@@ -43,7 +43,7 @@ form_login.addEventListener('submit', function(event){
             alert_login.style.display = "block";
         }
         else{
-            localStorage.setItem("token", data['token']);
+            localStorage.setItem('x-access-token', data['token']);
             alert_login.style.display = "none";
             form_login.style.display = "none";
             overlay.style.display = "none";
@@ -51,11 +51,11 @@ form_login.addEventListener('submit', function(event){
             img_profile.style.display="block"
             sucessLogin.innerHTML = data['msg'];
             sucessLogin.style.display = "block";
-            console.log(localStorage.getItem('token'))
         }
-    })
-
-})
+    }).catch(error=>{
+        console.log('ERRO', error);
+    });
+});
 
 
 const button_sign = document.getElementById("signup");
@@ -108,7 +108,7 @@ form_sign.addEventListener('submit', function(event){
             alert_sign.style.display = "block";
         }
         else{
-            localStorage.setItem('token', data['token'])
+            localStorage.setItem('x-access-token', data['token'])
             alert_sign.style.display = "none";
             overlay.style.display = "none";
             form_sign.style.display = "none";

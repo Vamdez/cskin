@@ -22,8 +22,5 @@ routes.get('/dados', (req, res)=>{
   
 routes.post('/sign', UserController.signValidation);
 
-routes.get('/save', SessionController.jwtVerify, (req, res)=>{
-  console.log(req.userId);
-  res.json({id:"1", nome:"Victor"});
-})
+routes.get('/save', SessionController.jwtVerify, UserController.get_UserDatas)
 module.exports = routes;

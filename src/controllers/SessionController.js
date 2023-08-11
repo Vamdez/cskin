@@ -10,6 +10,7 @@ class SessionController{
              return res.status(401).end();
             }
             req.userId = decoded.userId;
+            console.log(token);
             next();
         })
     }
