@@ -22,5 +22,8 @@ routes.get('/dados', (req, res)=>{
   
 routes.post('/sign', UserController.signValidation);
 
-routes.get('/save', SessionController.jwtVerify, UserController.get_UserDatas)
+routes.get('/save', SessionController.jwtVerify.bind(SessionController), UserController.get_UserDatas);
+
+routes.post('/logout', SessionController.logout.bind(SessionController), SessionController.jwtVerify.bind(SessionController));
+
 module.exports = routes;

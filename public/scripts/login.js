@@ -227,13 +227,40 @@ img_profile.addEventListener('click', ()=>{
     }).then(function(data){
         localStorage.setItem('name', data["name"]);
         localStorage.setItem('email', data["email"]);
-        console.log(data);
     }).catch(error =>{
         console.log("ERRO", error);
     });
     profile.style.display = 'block';
-    nameProfile.innerHTML = localStorage['name'];
-    emailProfile.innerHTML = localStorage['email'];
+    nameProfile.innerHTML =`Nome: ${localStorage['name']}`;
+    emailProfile.innerHTML =`Email: ${localStorage['email']}`;
 });
 
+const logout = document.getElementById('logout');
+const logout_confirmation = document.getElementById('logout-confirmation');
+const confirmed = document.getElementById('confirmed');
+const cancel = document.getElementById('cancel');
+logout.addEventListener('click', ()=>{
+    logout_confirmation.style.display = "block";
+})
 
+cancel.addEventListener('click', ()=>{
+    logout_confirmation.style.display = "none";
+})
+confirmed.addEventListener('click', async()=>{
+    const response = await fetch("http://localhost:5000/logout", {
+        method:"POST",
+        headers:{
+            "Content-Type": 'application/json',
+            "x-access-token": token
+        }
+    })
+    if(response.ok){
+        auth = false;
+        img_login.style.display = "block";
+        img_profile.style.display = "none";
+    }
+    else{
+        console.log("ERRO");
+    }
+    logout_confirmation.style.display = "none"
+})

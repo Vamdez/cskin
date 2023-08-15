@@ -9,14 +9,15 @@
     border-radius: 10px;
 }
 
-.data-profile{
-    
-}
+
 #name-profile,#email-profile{
     background-color: white;
 }
 .logout{
     position: fixed;
-    background-color: wheat;
     border: 1px solid black;
+}
+
+.logout-confirmation{
+    display: none;
 }
