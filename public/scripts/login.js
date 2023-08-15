@@ -1,3 +1,37 @@
+let auth = false;
+
+const token = localStorage['x-access-token'];
+
+document.addEventListener("DOMContentLoaded", function() {
+    fetch("http://localhost:5000/save",{
+        method: "GET",
+        headers:{
+            "Content-Type": 'application/json',
+            "x-access-token": token
+        }
+    }).then(function(response){
+        if(response.ok){
+            img_profile.style.display = 'block';
+            img_login.style.display = 'none';
+            console.log("Autorizado")
+            auth = true;
+            return response.json();
+        }
+        img_profile.style.display ='none';
+        img_login.style.display = 'block';
+        console.log("Não Autorizado");
+        auth = false;
+    }).then(function(data){
+        return data;
+    }).catch(error =>{
+        console.log("ERRO", error);
+    });
+});
+
+
+
+
+
 const button_login = document.getElementById("login-button");
 const menu_login = document.getElementById("menu-login");
 const overlay = document.getElementById("overlay");
@@ -41,9 +75,11 @@ form_login.addEventListener('submit', function(event){
         if(!data['auth']){
             alert_login.innerHTML = data['msg']
             alert_login.style.display = "block";
+            auth=false;
         }
         else{
             localStorage.setItem('x-access-token', data['token']);
+            auth=true;
             alert_login.style.display = "none";
             form_login.style.display = "none";
             overlay.style.display = "none";
@@ -133,3 +169,71 @@ const exit_login = document.getElementById("exit-login");
 const exit_sign = document.getElementById("exit-sign");
 exit_login.addEventListener('click', exit);
 exit_sign.addEventListener('click', exit);
+
+
+const save_button = document.getElementById("save-button");
+
+save_button.addEventListener("click", ()=>{
+    fetch("http://localhost:5000/save",{
+        method: "GET",
+        headers:{
+            "Content-Type": 'application/json',
+            "x-access-token": token
+        }
+    }).then(function(response){
+        if(response.ok){
+            img_profile.style.display = 'block';
+            img_login.style.display = 'none';
+            console.log("Autorizado")
+            auth = true;
+            return response.json();
+        }
+        menu_login.style.display = 'block';
+        img_profile.style.display ='none';
+        img_login.style.display = 'block';
+        console.log("Não Autorizado");
+        auth = false;
+    }).then(function(data){
+        return data;
+    }).catch(error =>{
+        console.log("ERRO", error);
+    });
+});
+
+const profile = document.getElementById('profile');
+const nameProfile = document.getElementById('name-profile');
+const emailProfile = document.getElementById('email-profile');
+
+img_profile.addEventListener('click', ()=>{
+    fetch("http://localhost:5000/save",{
+        method: "GET",
+        headers:{
+            "Content-Type": 'application/json',
+            "x-access-token": token
+        }
+    }).then(function(response){
+        if(response.ok){
+            img_profile.style.display = 'block';
+            img_login.style.display = 'none';
+            console.log("Autorizado")
+            auth = true;
+            return response.json();
+        }
+        menu_login.style.display = 'block';
+        img_profile.style.display ='none';
+        img_login.style.display = 'block';
+        console.log("Não Autorizado");
+        auth = false;
+    }).then(function(data){
+        localStorage.setItem('name', data["name"]);
+        localStorage.setItem('email', data["email"]);
+        console.log(data);
+    }).catch(error =>{
+        console.log("ERRO", error);
+    });
+    profile.style.display = 'block';
+    nameProfile.innerHTML = localStorage['name'];
+    emailProfile.innerHTML = localStorage['email'];
+});
+
+

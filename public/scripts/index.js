@@ -1,8 +1,7 @@
-let auth = false;
 
-const token = localStorage['x-access-token'];
+const save_button = document.getElementById("save-button");
 
-document.addEventListener("DOMContentLoaded", function() {
+save_button.addEventListener("click", ()=>{
     fetch("http://localhost:5000/save",{
         method: "GET",
         headers:{
@@ -17,6 +16,7 @@ document.addEventListener("DOMContentLoaded", function() {
             auth = true;
             return response.json();
         }
+        menu_login.style.display = 'block';
         img_profile.style.display ='none';
         img_login.style.display = 'block';
         console.log("Não Autorizado");
@@ -27,5 +27,3 @@ document.addEventListener("DOMContentLoaded", function() {
         console.log("ERRO", error);
     });
 });
-
-
