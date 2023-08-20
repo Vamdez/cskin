@@ -1,26 +1,21 @@
-let auth = false;
-
-const token = localStorage['x-access-token'];
 
 document.addEventListener("DOMContentLoaded", function() {
     fetch("http://localhost:5000/save",{
         method: "GET",
         headers:{
             "Content-Type": 'application/json',
-            "x-access-token": token
+            "x-access-token": localStorage['x-access-token']
         }
     }).then(function(response){
         if(response.ok){
             img_profile.style.display = 'block';
             img_login.style.display = 'none';
             console.log("Autorizado")
-            auth = true;
             return response.json();
         }
         img_profile.style.display ='none';
         img_login.style.display = 'block';
         console.log("Não Autorizado");
-        auth = false;
     }).then(function(data){
         return data;
     }).catch(error =>{
@@ -75,11 +70,9 @@ form_login.addEventListener('submit', function(event){
         if(!data['auth']){
             alert_login.innerHTML = data['msg']
             alert_login.style.display = "block";
-            auth=false;
         }
         else{
             localStorage.setItem('x-access-token', data['token']);
-            auth=true;
             alert_login.style.display = "none";
             form_login.style.display = "none";
             overlay.style.display = "none";
@@ -178,7 +171,7 @@ save_button.addEventListener("click", ()=>{
         method: "GET",
         headers:{
             "Content-Type": 'application/json',
-            "x-access-token": token
+            "x-access-token": localStorage['x-access-token']
         }
     }).then(function(response){
         if(response.ok){
@@ -192,7 +185,6 @@ save_button.addEventListener("click", ()=>{
         img_profile.style.display ='none';
         img_login.style.display = 'block';
         console.log("Não Autorizado");
-        auth = false;
     }).then(function(data){
         return data;
     }).catch(error =>{
@@ -209,7 +201,7 @@ img_profile.addEventListener('click', ()=>{
         method: "GET",
         headers:{
             "Content-Type": 'application/json',
-            "x-access-token": token
+            "x-access-token": localStorage['x-access-token']
         }
     }).then(function(response){
         if(response.ok){
@@ -223,7 +215,6 @@ img_profile.addEventListener('click', ()=>{
         img_profile.style.display ='none';
         img_login.style.display = 'block';
         console.log("Não Autorizado");
-        auth = false;
     }).then(function(data){
         localStorage.setItem('name', data["name"]);
         localStorage.setItem('email', data["email"]);
@@ -251,13 +242,11 @@ confirmed.addEventListener('click', async()=>{
         method:"POST",
         headers:{
             "Content-Type": 'application/json',
-            "x-access-token": token
+            "x-access-token": localStorage['x-access-token']
         }
     })
-    if(response.ok){
-        auth = false;
-        img_login.style.display = "block";
-        img_profile.style.display = "none";
+    if(!response.ok){
+        location.reload();
     }
     else{
         console.log("ERRO");

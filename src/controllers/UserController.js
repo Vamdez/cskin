@@ -2,6 +2,7 @@ const bcrypt = require('bcrypt');
 const { where } = require('sequelize');
 const jwt = require('jsonwebtoken');
 const Sign = require('../models/login');
+const { emit } = require('nodemon');
 
 
 class UserController{
@@ -37,15 +38,14 @@ class UserController{
       const passwordHash = await bcrypt.hash(password, salt);
 
       //Create User
-
       try{
       await Sign.create({
         name,
         email,
         password : passwordHash
       });
-      const email = await Sign.findOne({where: {email: email}})
-      const token = jwt.sign({userId: email.id}, process.env.SECRET, {expiresIn: 300});
+      const newEmail = await Sign.findOne({where: {email: email}})
+      const token = jwt.sign({userId: newEmail.id}, process.env.SECRET, {expiresIn: 300});
       res.status(200).json({msg: 'Cadastro realizado com sucesso', auth:true, token});
     }catch (error) {
       console.log(error);
